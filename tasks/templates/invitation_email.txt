@@ -1,0 +1,22 @@
+Hello,
+
+Welcome to the WorkFlow application!
+
+Your invitation code to complete your registration:
+
+{{code}}
+
+Important Information:
+• This code must be used within 24 hours
+• The code is single-use only
+• Do not share the code with anyone
+
+To register:
+1. Download the WorkFlow application
+2. Click the "Register" button
+3. Enter your information and use the code above
+
+If you have any questions, please contact your administrator.
+
+Best regards,
+Your Team

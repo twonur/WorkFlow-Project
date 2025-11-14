@@ -1,0 +1,14 @@
+DOCKER INSTALLATION STEPS
+=========================
+
+1) Initial installation with BUILD command
+    docker-compose build
+
+2) Start the project with the UP command
+    docker-compose up
+
+3) Start the project in the background with the UP -D command
+    docker-compose up -d
+
+4) Stop the project with the DOWN command
+    docker-compose down 

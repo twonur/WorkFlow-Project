@@ -1,0 +1,60 @@
+services:
+  db-prod:
+    image: postgres:13
+    volumes:
+      - postgres_data_prod:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: always
+
+  web-prod:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: >
+      sh -c "sleep 10 &&
+             python manage.py migrate &&
+             python manage.py collectstatic --noinput &&
+             gunicorn config.wsgi:application --bind 0.0.0.0:8000"
+    volumes:
+      - static_volume_prod:/app/static
+    expose:
+      - 8000
+    environment:
+      - DEBUG=False
+      - DJANGO_ALLOWED_HOSTS=example.com
+      - DB_PASSWORD=${DB_PASSWORD}
+      - HETZNER_ACCESS_KEY=${HETZNER_ACCESS_KEY}
+      - HETZNER_SECRET_KEY=${HETZNER_SECRET_KEY}
+      - HETZNER_BUCKET_NAME=${HETZNER_BUCKET_NAME}
+      - HETZNER_ENDPOINT_URL=${HETZNER_ENDPOINT_URL}
+    depends_on:
+      db-prod:
+        condition: service_healthy
+    restart: always
+
+  nginx-prod:
+    build: ./nginx
+    volumes:
+      - static_volume_prod:/app/static
+    ports:
+      - "80:80"
+    depends_on:
+      - web-prod
+    restart: always
+
+volumes:
+  postgres_data_prod:
+  static_volume_prod:
+
+networks:
+  default:
+    name: workflow-prod-network 

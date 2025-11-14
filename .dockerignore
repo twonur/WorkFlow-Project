@@ -1,0 +1,36 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+*.egg
+
+# Virtual Environment
+venv/
+ENV/
+
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# Media ve Static dosyalar (volume olarak bağlanacak)
+media/
+static/
+
+# Veritabanı
+*.sqlite3
+
+# Diğer
+.DS_Store
+*.log
+*.pot
+*.pyc
+local_settings.py 
