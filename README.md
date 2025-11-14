@@ -76,7 +76,7 @@ To digitize the processes of assigning, tracking, and completing tasks. This sys
 
 ## Installation
 
-For detailed installation steps, please see the [SETUP.MD](SETUP.MD) file.
+For detailed installation steps, please see the [SETUP.md](SETUP.md) file.
 
 ### Requirements
 
